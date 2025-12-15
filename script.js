@@ -22,9 +22,17 @@ function instrumentCards(instrumentCategory) {
           ({ category }) => category === instrumentCategory
         );
 
-  return instruments;
+  return instruments
+    .map(({ instrument, price }) => {
+      return `
+          <div class="card">
+            <h2>${instrument}</h2>
+            <p>$${price}</p>
+          </div>
+        `;
+    })
 }
 
 selectContainer.addEventListener("change", () => {
-  console.log(instrumentCards(selectContainer.value));
+  productsContainer.innerHTML = instrumentCards(selectContainer.value).join("");
 });
